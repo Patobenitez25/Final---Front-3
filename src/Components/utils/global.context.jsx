@@ -1,15 +1,48 @@
-import { createContext } from "react";
+import { createContext, useContext, useEffect,useState ,useReducer } from "react";
 
-export const initialState = {theme: "", data: []}
+export const DentistStates = createContext();
 
-export const ContextGlobal = createContext(undefined);
+const dentistasFavs = JSON.parse(localStorage.getItem('favs'))
 
-export const ContextProvider = ({ children }) => {
-  //Aqui deberan implementar la logica propia del Context, utilizando el hook useMemo
-
-  return (
-    <ContextGlobal.Provider value={{}}>
-      {children}
-    </ContextGlobal.Provider>
-  );
+export const initialState = {
+  favs: dentistasFavs || [], //
+  cart: [],
+  theme: "",
 };
+
+export const dentistReducer = (state, action) => {
+
+  switch (action.type) {
+    case "ADD_FAVORITES":
+      return { ...state, favs: [...state.favs, action.payload] };
+    case "REMOVE_BY_ID":
+      let newArr = state.favs.filter((product) => product.id !== action.payload)
+      return { ...state, favs: newArr };
+    case "REMOVE_ALL":
+      return { ...state, favs: [] };
+    case "CHANGE_MODE":
+      return { ...state, theme: !state.theme };
+    default:
+      return state;
+  }
+}
+
+  const DentistContext = ({ children }) => {
+    //Estados globales
+    const [state, dispatch] = useReducer(dentistReducer, initialState);
+  
+    //Aca van las funciones globales
+    let data = { state, dispatch };
+  
+    useEffect(() => {
+      localStorage.setItem('favs', JSON.stringify(state.favs))
+    }, [state.favs])
+  
+    return (
+      <DentistStates.Provider value={data}>{children}</DentistStates.Provider>
+    );
+  };
+
+  export default DentistContext;
+
+  export const useDentistStates = () => useContext(DentistStates);
