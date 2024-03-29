@@ -12,12 +12,12 @@ const Favs = () => {
   return (
     <>
       <Navbar/>
-      <h1>Dentistas Favs</h1>
+      <h1>Dentistas Favoritos</h1>
       <div className="card">
         {/* este componente debe consumir los destacados del localStorage */}
         {/* Deberan renderizar una Card por cada uno de ellos */}
         {state.favs.map((dentist) => {
-        <Card key={dentist.id} id={dentist.id}/>
+          return <Card key={dentist.id} id={dentist.id}/>
         })}
       </div>
       <Footer/>

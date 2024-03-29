@@ -7,10 +7,11 @@ import { useDentistStates } from "./utils/global.context";
 
 
 
-const Card = ({id}) => {
+
+const Card = ({id}, Favs) => {
 
   const [dentistas, setDentistas] = useState([])
-  const {state, dispatch} = useDentistStates()
+  const {state} = useDentistStates()
   console.log(state)
 
   useEffect(() =>{
@@ -23,6 +24,8 @@ const Card = ({id}) => {
 
   return (
       <div className="card">
+          <Link to={`/Detail/${id}`}>
+            
           {/* En cada card deberan mostrar en name - username y el id */}
           {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
           {dentistas.map((dentista) => 
@@ -30,9 +33,9 @@ const Card = ({id}) => {
             <img src="../../public/images/doctor.jpg" alt="" />
             <h4>{dentista.name} {dentista.username}</h4>
             <p>ID: {dentista.id}</p>
-            <Link to={`/Detail/${dentista.id}`}>Ver detalles</Link>
           </div>
           )}
+          </Link>
       </div>
   )
 
