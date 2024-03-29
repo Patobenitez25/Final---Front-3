@@ -7,7 +7,7 @@ import Footer from "../Components/Footer"
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Favs = () => {
-  const {state, dispatch} = useDentistStates();
+  const {state} = useDentistStates();
 
   return (
     <>
@@ -16,10 +16,8 @@ const Favs = () => {
       <div className="card">
         {/* este componente debe consumir los destacados del localStorage */}
         {/* Deberan renderizar una Card por cada uno de ellos */}
-        {state.favs.map((dentista) => {
-        <div key={dentista.id}>
-          
-        </div>
+        {state.favs.map((dentist) => {
+        <Card key={dentist.id} id={dentist.id}/>
         })}
       </div>
       <Footer/>

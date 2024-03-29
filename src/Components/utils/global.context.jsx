@@ -30,14 +30,14 @@ export const dentistReducer = (state, action) => {
   const DentistContext = ({ children }) => {
     //Estados globales
     const [state, dispatch] = useReducer(dentistReducer, initialState);
-  
+
     //Aca van las funciones globales
     let data = { state, dispatch };
-  
+
     useEffect(() => {
       localStorage.setItem('favs', JSON.stringify(state.favs))
     }, [state.favs])
-  
+
     return (
       <DentistStates.Provider value={data}>{children}</DentistStates.Provider>
     );

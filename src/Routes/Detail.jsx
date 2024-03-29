@@ -15,7 +15,7 @@ const Detail = () => {
   const {id} = useParams()
   const [dentistSelected, setDentistSelected] = useState({})
   const {state, dispatch} = useDentistStates()
-  console.log( state )
+  console.log(state)
 
   useEffect(() => {
     const getData = async()=>{
@@ -26,17 +26,20 @@ const Detail = () => {
     getData()
 
   }, [id]);
+  const addFav = () => {
+    dispatch({ type: "ADD_FAV", payload: dentist });
+    alert(dentist.name + " agregado a favoritos");
+  }
+
   return (
-    <div className="card__child" >
+    <div className="card__child">
       <Navbar/>
       <img src="../../public/images/doctor.jpg" alt="" />
             <h4>{dentistSelected.name} {dentistSelected.username}</h4>
             <p>Contacto: {dentistSelected.email} </p>
             <p>{dentistSelected.phone}</p>
             <p>{dentistSelected.website} </p>
-            {/* <button onClick={() => {dispatch( {type:"ADD_FAVORITES", payload: dentistSelected } )}} className="favButton">Destacar</button> */}
-      {/* aqui deberan renderizar la informacion en detalle de un user en especifico */}
-      {/* Deberan mostrar el name - email - phone - website por cada user en especifico */}
+            { <button onClick={addFav} className="favButton">Destacar</button>}
     </div>
   )
 }

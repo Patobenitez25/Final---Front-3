@@ -2,15 +2,15 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getDentistas, getDentistaById } from "../api/dentista";
+import Favs from "../Routes/Favs";
 import { useDentistStates } from "./utils/global.context";
 
 
 
-const Card = () => {
-  
+const Card = ({id}) => {
+
   const [dentistas, setDentistas] = useState([])
   const {state, dispatch} = useDentistStates()
-  const [dentistSelected, setDentistSelected] = useState({})
   console.log(state)
 
   useEffect(() =>{
@@ -20,9 +20,7 @@ const Card = () => {
     }
     getData()
   },[])
-  let saveDentist = (event) =>{
-    setDentistSelected(event.target.value)
-  }
+
   return (
       <div className="card">
           {/* En cada card deberan mostrar en name - username y el id */}
@@ -35,9 +33,9 @@ const Card = () => {
             <Link to={`/Detail/${dentista.id}`}>Ver detalles</Link>
           </div>
           )}
-          {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
       </div>
-  );
-};
+  )
+
+      }
 
 export default Card;
