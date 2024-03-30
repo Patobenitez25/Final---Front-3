@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { getDentistas, getDentistaById } from "../api/dentista";
 import { useDentistStates } from "./utils/global.context";
 
-const Card = ({dentist})=> {
+const Card = ()=> {
 
   const {state} = useDentistStates()
   console.log(state)
@@ -17,8 +17,14 @@ const Card = ({dentist})=> {
       setDentistas(dentistasData)
     }; getData()
   },[]) 
-  
 
+  //Si retorno el JSX comentado abajo puedo retornar las cards en Favs.jsx pero mi home se rompe
+    {/* < div className={`card__child ${themeClass}`} key={item.id}>
+          <img src="../../public/images/doctor.jpg" alt="" />
+          <h4 className={themeClass}>{item.name} {item.username}</h4>
+          <p className={themeClass}>ID: {item.id}</p>
+          <Link to={`/Detail/${item.id}`} className={themeClass}>Ver detalle</Link>
+        </div> */}
   return (
     <div className={`card ${themeClass}`}>
       {/* En cada card deberan mostrar en name - username y el id */}

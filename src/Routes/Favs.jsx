@@ -18,16 +18,14 @@ const Favs = () => {
 
   return (
     <>
-      <Navbar/>
-      <h1 className={ themeClass}>Dentistas Favoritos</h1>
-      <div className={`card ${themeClass}`}>
-        
+      <h1 className={themeClass}>Dentists Favs</h1>
+      <div className={`card-grid ${themeClass}`}>
+        {/* este componente debe consumir los destacados del localStorage */}
         {/* Deberan renderizar una Card por cada uno de ellos */}
-        {state.favs.map((dentist) => {
-          return <Card key={dentist.id} dentist={dentist}/>
+        {state.favs.map((dentista) => {
+          return <Card item={dentista} key={dentista.id} />;
         })}
       </div>
-      <Footer/>
     </>
   );
 };
