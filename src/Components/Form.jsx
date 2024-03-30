@@ -1,49 +1,49 @@
-import React from "react";
-import { useState } from "react";
-import validator from 'email-validator';
-import { useEffect } from "react";
+import React, { useState } from 'react';
 
 const Form = () => {
-  //Aqui deberan implementar el form completo con sus validaciones
-  
-  const [request, setRequest] = useState({
-    nombreCompleto: "",
-    email: ""
-  })
-  const [isValid, setIsValid] = useState(true);
-  const [show, setShow] = useState(false)
-  const [err, setErr] = useState(false)
+  const [formData, setFormData] = useState({ nombre: '', email: '' });
+  const [error, setError] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
+  const validarEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
 
-  useEffect(() =>{
-    const handleEmailChange = () => {
-      const newEmail = request.email
-      setIsValid(validator.validate(newEmail));
-    }; handleEmailChange()
-  },[request.email])
-  
-  const handleSubmit = (event) => {
-        event.preventDefault()
-        if(request.nombreCompleto.trim().length > 5 && isValid){
-            setShow(true)
-            setErr(false)
-            console.log(request);
-        } else {
-            setErr(true)
-        }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formData.nombre.length <= 5 || !validarEmail(formData.email)) {
+      setError('Por favor verifique su información nuevamente');
+    } else {
+      console.log('Datos enviados:', formData);
+      setSubmitted(true);
     }
-    
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label >Nombre Completo</label>
-        <input type="text" onBlur={(event) => setRequest({...request, nombreCompleto: event.target.value})} />
-        <label htmlFor="">Email</label>
-        <input type="email" onBlur={(event) => setRequest({...request, email: event.target.value})}/>
-        <button type="submit">Enviar</button>
+        <div>
+          <label>Nombre completo:</label>
+          <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} />
+        </div>
+        <div>
+          <label>Email:</label>
+          <input type="email" name="email" value={formData.email} onChange={handleChange} />
+        </div>
+        {submitted ? (
+          <p>Gracias {formData.nombre}, te contactaremos cuanto antes vía mail.</p>
+        ) : (
+          <>
+            {error && <p>{error}</p>}
+            <button type="submit">Enviar</button>
+          </>
+        )}
       </form>
-      {err? "Por favor complete los campos correctamente" : `Gracias ${request.nombreCompleto}, 
-        te contactaremos cuando antes vía mail`}
     </div>
   );
 };

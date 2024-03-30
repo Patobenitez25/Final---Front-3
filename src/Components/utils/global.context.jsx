@@ -7,7 +7,7 @@ const dentistasFavs = JSON.parse(localStorage.getItem('favs'))
 export const initialState = {
   favs: dentistasFavs || [], //
   cart: [],
-  theme: "",
+  theme: "light",
 };
 
 export const dentistReducer = (state, action) => {
@@ -21,7 +21,7 @@ export const dentistReducer = (state, action) => {
     case "REMOVE_ALL":
       return { ...state, favs: [] };
     case "CHANGE_MODE":
-      return { ...state, theme: !state.theme };
+      return { ...state, theme: state.theme === "light" ? "dark" : "light" };
     default:
       return state;
   }
@@ -46,3 +46,8 @@ export const dentistReducer = (state, action) => {
   export default DentistContext;
 
   export const useDentistStates = () => useContext(DentistStates);
+
+  export const ThemeWrapper = ({ children, theme }) => {
+    const themeClass = theme === 'dark' ? 'dark' : 'light';
+    return <div className={themeClass}>{children}</div>;
+  };

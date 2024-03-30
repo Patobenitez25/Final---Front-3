@@ -1,21 +1,31 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDentistStates } from "./utils/global.context";
-import '../Components/Navbar.css'
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
-export const Navbar = () => {
-const { state, dispatch } = useDentistStates()
-console.log(state.theme)
+import { useDentistStates} from './utils/global.context';
+import { ThemeWrapper } from './utils/global.context';
+import '../Components/Navbar.css';
 
-return (
-  <div className={state.theme ? "containerNavbar-dark" : "containerNavbar-light"}>
-    <ul>
-      <Link to="/">Home</Link>
-      <Link to="/Favs">Favorites</Link>
-      <Link to="/Contact">Contacto</Link>
-    </ul>
-    <button onClick={()=> dispatch( {type: "CHANGE_MODE"} ) }>Cambiar modo</button>
-    <h3>El modo esta en { state.theme ? "dark" : "light" }</h3>
-  </div>
-);
-}
+export const Navbar = () => {
+  const { state, dispatch } = useDentistStates();
+
+  const themeClass = state.theme === 'dark' ? 'dark' : 'light';
+  // Manejar cambio de tema
+  const handleThemeChange = () => {
+    dispatch({ type: "CHANGE_MODE" });
+  };
+
+  return (
+    <ThemeWrapper theme={state.theme}>
+      <div className={`containerNavbar ${themeClass}`}>
+        <ul className={`containerNavbar__list ${themeClass}`}>
+          <Link to="/" className={themeClass}>Home</Link>
+          <Link to="/Favs" className={themeClass}>Favoritos</Link>
+          <Link to="/Contact" className={themeClass}>Contacto</Link>
+        </ul>
+        <div className={`containerNavbar__div ${themeClass}`}>
+          <button className='navBar-button' onClick={handleThemeChange}>Cambiar modo</button>
+          <h3>El modo está en {state.theme}</h3>
+        </div>
+      </div>
+    </ThemeWrapper>
+  );
+};

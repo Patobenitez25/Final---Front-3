@@ -72,13 +72,13 @@ img{
 
  .card{
   display: grid;
+  grid-template-columns: 30% 30%;
   justify-content: space-evenly;
   align-items: center;
   align-content: center;
   gap: 2%;
   padding-top: 10%;
   margin-bottom: 10%;
-  border: 0.5px solid rgb(136, 136, 136);
   background-color: #FFFF;
 }
 .card__child{
@@ -93,7 +93,7 @@ img{
   
 }
 .card__child button{
-  width: 70%; 
+  width: 25%; 
   font-size: 1.5rem;
   text-decoration: none;
   border-radius: 10px;
@@ -105,9 +105,7 @@ img{
   height: 70%;
   margin-top: 30px;
 }
-.card:hover{
-  border: 0.5px solid rgb(206, 217, 142);
-}
+
 
 
 .card-grid{
@@ -139,7 +137,7 @@ tr:nth-child(even) {
 }
 
 .dark{
-  background-color: #12121296;
+  background-color: black;
   color: white;
 }
 .light {
