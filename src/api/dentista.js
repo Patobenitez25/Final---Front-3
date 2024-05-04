@@ -2,8 +2,12 @@ import axios from "axios";
 
 
 export const getDentistas = async () => {
-    let response = await axios.get("https://jsonplaceholder.typicode.com/users");
-    return response.data    
+    try {
+        let response = await axios.get("https://jsonplaceholder.typicode.com/users");
+        return response.data    
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 export const getDentistaById = async (id) => {

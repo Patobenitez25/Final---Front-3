@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect,useState ,useReducer } from "react";
+import { createContext, useContext, useEffect ,useReducer } from "react";
 
 export const DentistStates = createContext();
 
@@ -39,7 +39,9 @@ export const dentistReducer = (state, action) => {
     }, [state.favs])
 
     return (
-      <DentistStates.Provider value={data}>{children}</DentistStates.Provider>
+      <DentistStates.Provider value={data}>
+        {children}
+      </DentistStates.Provider>
     );
   };
 

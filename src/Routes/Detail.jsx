@@ -32,6 +32,8 @@ const Detail = () => {
   const addFav = () => {
     dispatch( {type:"ADD_FAVORITES", payload: dentistSelected })
   }
+
+
   return (
     <>
       <Navbar/>
