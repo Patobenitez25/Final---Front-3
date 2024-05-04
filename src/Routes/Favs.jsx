@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../Components/Navbar";
+import {Navbar} from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import { useDentistStates } from "../Components/utils/global.context";
 import { Link } from "react-router-dom";
