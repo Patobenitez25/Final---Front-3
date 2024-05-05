@@ -25,6 +25,9 @@ code {
 h1{
   text-align: center;
 }
+.favs__title{
+  margin: 0;
+}
 h4{
   text-align: center;
   margin-bottom: 30px;
@@ -87,10 +90,14 @@ img{
   justify-content: center;
   align-items: center;
   align-content: center;
+  margin-top: 5%;
   padding: 1%;
   border: 1px solid #000;
   font-size: 0.8rem;
   
+}
+.card__child.dark{
+  border-color: #FFFFFF;
 }
 .card__child button{
   max-width: 200px;

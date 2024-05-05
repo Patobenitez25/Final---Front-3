@@ -13,7 +13,7 @@ const Favs = () => {
   return (
     <>
       <Navbar />
-      <h1 className={themeClass}>Dentistas Favoritos</h1>
+      <h1 className={`favs__title ${themeClass}`}>Dentistas Favoritos</h1>
       <div className={`card-grid ${themeClass}`}>
         {favs.map((dentista) => (
           <div className={`card__child ${themeClass}`} key={dentista.id}>
